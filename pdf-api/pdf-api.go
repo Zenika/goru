@@ -8,6 +8,8 @@ import (
 
 	"github.com/unidoc/unidoc/pdf"
 	"github.com/urfave/cli"
+
+	"github.com/Zenika/pdf-api/server"
 )
 
 func main() {
@@ -35,7 +37,20 @@ func main() {
 				return rotatePage(inputFile, pageNumber, rotation, outputFile)
 			},
 		},
+		{
+			Name:      "server",
+			Usage:     "Start the server",
+			ArgsUsage: "<port>",
+			Action: func(c *cli.Context) error {
+				port, err := strconv.Atoi(c.Args().Get(0))
+				if err != nil {
+					return errors.Wrap(err, "Port must be a valid integer")
+				}
+				return server.StartRouter(port)
+			},
+		},
 	}
+
 	app.EnableBashCompletion = true
 
 	app.Run(os.Args)

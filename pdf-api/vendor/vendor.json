@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "5NbtR9OcQHTSwrMfLjXqGs+hwqs=",
+			"path": "github.com/husobee/vestigo",
+			"revision": "da51f43dc6e24dc473cb47ff98bafedd7ee1fa9d",
+			"revisionTime": "2017-01-27T12:52:10Z"
+		},
+		{
 			"checksumSHA1": "ynJSWoF6v+3zMnh9R0QmmG6iGV8=",
 			"path": "github.com/pkg/errors",
 			"revision": "248dadf4e9068a0b3e79f02ed0a610d935de5302",
