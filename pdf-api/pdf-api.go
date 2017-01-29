@@ -75,6 +75,29 @@ func main() {
 			},
 		},
 		{
+			Name:      "move-page",
+			Usage:     "Move a page",
+			ArgsUsage: "<input-file> <page-number> <target> <output-file>",
+			Action: func(c *cli.Context) error {
+				inputFile := c.Args().Get(0)
+				pageNumber, err := strconv.Atoi(c.Args().Get(1))
+				if err != nil {
+					return errors.Wrap(err, "Page number must be a valid integer")
+				}
+				target, err := strconv.Atoi(c.Args().Get(2))
+				if err != nil {
+					return errors.Wrap(err, "Target must be a valid integer")
+				}
+				outputFile := c.Args().Get(3)
+				action := domain.Action{
+					Action: "MOVE_PAGE",
+					Page:   pageNumber,
+					Target: &target,
+				}
+				return applyActionToFile(inputFile, action, outputFile)
+			},
+		},
+		{
 			Name:      "server",
 			Usage:     "Start the server",
 			ArgsUsage: "<port>",

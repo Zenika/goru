@@ -18,5 +18,4 @@ govendor sync
 ```
 
 ## TODO
- - Move page (in document)
- - Suppress page
+ - Update this README

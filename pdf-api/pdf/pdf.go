@@ -89,6 +89,11 @@ func (document *Document) applyActionsToDocument(actions []domain.Action) error 
 				return err
 			}
 			break
+		case "MOVE_PAGE":
+			if err := document.movePage(page, action.Target); err != nil {
+				return err
+			}
+			break
 		default:
 			return errors.Errorf("Unknown action %s", action.Action)
 		}
@@ -122,9 +127,35 @@ func (document *Document) deletePage(page int) error {
 	return nil
 }
 
+func (document *Document) movePage(page int, pTarget *int) error {
+	if err := document.isValidPage(page); err != nil {
+		return err
+	}
+
+	if pTarget == nil {
+		return errors.New("Missing mandatory target parameter for move page action")
+	}
+
+	target := *pTarget - 1
+
+	if target < 0 || target > len(document.Pages) {
+		return errors.Errorf("Invalid target %d, should be between 1 and %d", target+1, len(document.Pages)+1)
+	}
+
+	if page < target {
+		target -= 1
+	}
+
+	pageToMove := document.Pages[page]
+	document.Pages = append(document.Pages[:page], document.Pages[page+1:]...)
+	document.Pages = append(document.Pages[:target], append([]*pdf.PdfPage{pageToMove}, document.Pages[target:]...)...)
+
+	return nil
+}
+
 func (document *Document) isValidPage(page int) error {
 	if page < 0 || page >= len(document.Pages) {
-		return errors.Errorf("Invalid page number %s, should be between 1 and %s", page+1, len(document.Pages))
+		return errors.Errorf("Invalid page number %d, should be between 1 and %d", page+1, len(document.Pages))
 	}
 	return nil
 }
