@@ -18,6 +18,5 @@ govendor sync
 ```
 
 ## TODO
- - Rotate page (left or right)
  - Move page (in document)
  - Suppress page
