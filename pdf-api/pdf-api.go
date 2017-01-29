@@ -57,6 +57,24 @@ func main() {
 			},
 		},
 		{
+			Name:      "delete-page",
+			Usage:     "Delete a page",
+			ArgsUsage: "<input-file> <page-number> <output-file>",
+			Action: func(c *cli.Context) error {
+				inputFile := c.Args().Get(0)
+				pageNumber, err := strconv.Atoi(c.Args().Get(1))
+				if err != nil {
+					return errors.Wrap(err, "Page number must be a valid integer")
+				}
+				outputFile := c.Args().Get(2)
+				action := domain.Action{
+					Action: "DELETE_PAGE",
+					Page:   pageNumber,
+				}
+				return applyActionToFile(inputFile, action, outputFile)
+			},
+		},
+		{
 			Name:      "server",
 			Usage:     "Start the server",
 			ArgsUsage: "<port>",

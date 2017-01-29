@@ -79,12 +79,18 @@ func (document *Document) applyActionsToDocument(actions []domain.Action) error 
 			if err := document.rotatePage(page, -90); err != nil {
 				return err
 			}
-			break
 		case "RIGHT_ROTATE_PAGE":
 			if err := document.rotatePage(page, 90); err != nil {
 				return err
 			}
 			break
+		case "DELETE_PAGE":
+			if err := document.deletePage(page); err != nil {
+				return err
+			}
+			break
+		default:
+			return errors.Errorf("Unknown action %s", action.Action)
 		}
 	}
 
@@ -102,6 +108,16 @@ func (document *Document) rotatePage(page int, rotation int) error {
 	}
 	pageRotation += int64(rotation)
 	document.Pages[page].Rotate = &pageRotation
+
+	return nil
+}
+
+func (document *Document) deletePage(page int) error {
+	if err := document.isValidPage(page); err != nil {
+		return err
+	}
+
+	document.Pages = append(document.Pages[:page], document.Pages[page+1:]...)
 
 	return nil
 }
