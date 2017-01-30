@@ -1,13 +1,18 @@
-package pdf
+package pdf // import "github.com/Zenika/pdf-api/pdf"
 
 import (
 	"os"
+	"path/filepath"
 
 	"github.com/pkg/errors"
 
 	"github.com/unidoc/unidoc/pdf"
 
 	"github.com/Zenika/pdf-api/domain"
+)
+
+const (
+	documentsDir = "documents"
 )
 
 type Document struct {
@@ -29,6 +34,10 @@ func ApplyActionsToFile(inputFile string, actions []domain.Action, outputFile st
 	}
 
 	return nil
+}
+
+func GetDocumentPath(document string) string {
+	return filepath.Join(documentsDir, document+".pdf")
 }
 
 func readDocumentFromFile(file string) (*Document, error) {

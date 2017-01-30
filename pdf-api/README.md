@@ -1,5 +1,10 @@
 # PDF Manipulation API
 
+## Run in docker
+```
+docker run -d -p 8080:8080 zenika/pdf-api server 8080
+```
+
 ## Installation
 Link the project in your `$GOPATH` :
 ```
@@ -14,17 +19,29 @@ go get -u github.com/kardianos/govendor
 
 Fetch go dependencies :
 ```
+cd $GOPATH/src/github.com/Zenika/pdf-api
 govendor sync
+```
+
+## Build
+```
+cd $GOPATH/src/github.com/Zenika/pdf-api
+go build
 ```
 
 ## Run
 Build then launch server on port 8080 :
 ```
-go build
 ./pdf-api server 8080
 ```
 
-Then make a `POST` request on `/documents/:fileName/editeur` with actions to perform.
+PDF files from `default-documents/` folder will be automatically copied to `documents/` folder at startup, and available to download and modify.
+
+Upload new files with `PUT` requests on `/document/:file/content` (`file` without `.pdf` suffix) with content type `application/pdf`.
+
+Download a file with a `GET` request on `/document/:file/content` (`file` without `.pdf` suffix).
+
+Modify a file with a `POST` request on `/document/:file/editeur` (`file` without `.pdf` suffix) with actions to perform.
 
 Example :
 ```
@@ -57,7 +74,7 @@ Example :
 ]
 ```
 
-A new PDF named with current timestamp gets generated on disk.
+WARNING ! The PDF file gets modified in place without backup !
 
 ## Run in CLI mode
 Download a PDF to manipulate :
@@ -82,7 +99,5 @@ Move a page :
 ```
 
 ## TODO
- - Add the ability to upload a document
- - Add the ability to download a document
- - Dockerize
- - CircleCI ?
+ - Add logs
+ - CircleCI -> WIP

@@ -1,0 +1,12 @@
+machine:
+  services:
+    - docker
+
+compile:
+  override:
+    - docker run -v $(pwd):/go/src/github.com/Zenika/pdf-api zenika/alpine-golang:1.7 /bin/ash -c "cd /go/src/github.com/Zenika/pdf-api && govendor sync && GOOS=linux go build -a --ldflags '-extldflags \"-static\"' -tags netgo -installsuffix netgo"
+
+deployment:
+  docker:
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - docker build -t zenika/pdf-api . && docker push zenika/pdf-api
