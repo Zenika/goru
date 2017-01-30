@@ -15,8 +15,20 @@
 			"revisionTime": "2016-10-29T09:36:37Z"
 		},
 		{
-			"checksumSHA1": "rboFVFFW6U/cMq5KXrOGJ8MzmEc=",
-			"path": "github.com/unidoc/unidoc",
+			"checksumSHA1": "gX10eHM3NzQ7z2DgW92yLdkPitM=",
+			"path": "github.com/unidoc/unidoc/common",
+			"revision": "4c805ef09726a3e8601c82e0a20f332186d39f61",
+			"revisionTime": "2017-01-05T13:17:00Z"
+		},
+		{
+			"checksumSHA1": "kFDZyMhvQ6MEgtJhNYBkpfxFOdg=",
+			"path": "github.com/unidoc/unidoc/license",
+			"revision": "4c805ef09726a3e8601c82e0a20f332186d39f61",
+			"revisionTime": "2017-01-05T13:17:00Z"
+		},
+		{
+			"checksumSHA1": "EgSOPJWj1nqXqjlt3w3GV5PgbXA=",
+			"path": "github.com/unidoc/unidoc/pdf",
 			"revision": "4c805ef09726a3e8601c82e0a20f332186d39f61",
 			"revisionTime": "2017-01-05T13:17:00Z"
 		},
