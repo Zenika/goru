@@ -106,6 +106,9 @@ func main() {
 				if err != nil {
 					return errors.Wrap(err, "Port must be a valid integer")
 				}
+				if err = pdf.EnsureDocumentsDir(); err != nil {
+					return err
+				}
 				return server.StartRouter(port)
 			},
 		},

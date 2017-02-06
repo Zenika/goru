@@ -35,8 +35,6 @@ Build then launch server on port 8080 :
 ./pdf-api server 8080
 ```
 
-PDF files from `default-documents/` folder will be automatically copied to `documents/` folder at startup, and available to download and modify.
-
 Upload new files with `PUT` requests on `/document/:file/content` (`file` without `.pdf` suffix) with content type `application/pdf`.
 
 Download a file with a `GET` request on `/document/:file/content` (`file` without `.pdf` suffix).

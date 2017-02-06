@@ -19,6 +19,14 @@ type Document struct {
 	Pages []*pdf.PdfPage
 }
 
+func EnsureDocumentsDir() error {
+	if err := os.MkdirAll(documentsDir, 0755); err != nil {
+		return errors.Wrap(err, "Error while creating documents dir")
+	}
+
+	return nil
+}
+
 func ApplyActionsToFile(inputFile string, actions []domain.Action, outputFile string) error {
 	document, err := readDocumentFromFile(inputFile)
 	if err != nil {
