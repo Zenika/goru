@@ -1,5 +1,11 @@
 # Goru
 
+## Naming
+
+Oru is the root of "Origami". Goru is the concatenation of `Go`+`oru`
+
+This library aims to help people with pdf transformations like rotation, ordering...
+
 ## Run in docker
 ```
 docker run -d -p 8080:8080 zenika/goru server 8080
