@@ -1,4 +1,4 @@
-package domain // import "github.com/Zenika/pdf-api/domain"
+package domain // import "github.com/Zenika/goru/domain"
 
 type Action struct {
 	Action string

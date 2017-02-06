@@ -1,4 +1,4 @@
-package main // import "github.com/Zenika/pdf-api"
+package main // import "github.com/Zenika/goru"
 
 import (
 	"os"
@@ -8,15 +8,15 @@ import (
 
 	"github.com/urfave/cli"
 
-	"github.com/Zenika/pdf-api/domain"
-	"github.com/Zenika/pdf-api/pdf"
-	"github.com/Zenika/pdf-api/server"
+	"github.com/Zenika/goru/domain"
+	"github.com/Zenika/goru/pdf"
+	"github.com/Zenika/goru/server"
 )
 
 func main() {
 	app := cli.NewApp()
 
-	app.Name = "pdf-api"
+	app.Name = "goru"
 	app.Usage = "Manipulate PDF files"
 
 	app.Commands = []cli.Command{

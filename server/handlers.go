@@ -1,4 +1,4 @@
-package server // import "github.com/Zenika/pdf-api/server"
+package server // import "github.com/Zenika/goru/server"
 
 import (
 	"encoding/json"
@@ -10,8 +10,8 @@ import (
 
 	"github.com/husobee/vestigo"
 
-	"github.com/Zenika/pdf-api/domain"
-	"github.com/Zenika/pdf-api/pdf"
+	"github.com/Zenika/goru/domain"
+	"github.com/Zenika/goru/pdf"
 )
 
 func postEditeurHandler(w http.ResponseWriter, r *http.Request) {

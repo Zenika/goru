@@ -1,4 +1,4 @@
-package pdf // import "github.com/Zenika/pdf-api/pdf"
+package pdf // import "github.com/Zenika/goru/pdf"
 
 import (
 	"os"
@@ -8,7 +8,7 @@ import (
 
 	"github.com/unidoc/unidoc/pdf"
 
-	"github.com/Zenika/pdf-api/domain"
+	"github.com/Zenika/goru/domain"
 )
 
 const (

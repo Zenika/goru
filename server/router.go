@@ -1,4 +1,4 @@
-package server // import "github.com/Zenika/pdf-api/server"
+package server // import "github.com/Zenika/goru/server"
 
 import (
 	"net/http"

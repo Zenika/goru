@@ -1,15 +1,15 @@
-# PDF Manipulation API
+# Goru
 
 ## Run in docker
 ```
-docker run -d -p 8080:8080 zenika/pdf-api server 8080
+docker run -d -p 8080:8080 zenika/goru server 8080
 ```
 
 ## Installation
 Link the project in your `$GOPATH` :
 ```
 mkdir -p $GOPATH/src/github.com/Zenika
-ln -s $(pwd) $GOPATH/src/github.com/Zenika/pdf-api
+ln -s $(pwd) $GOPATH/src/github.com/Zenika/goru
 ```
 
 As a prerequisite for managing dependencies, install `govendor` :
@@ -19,20 +19,20 @@ go get -u github.com/kardianos/govendor
 
 Fetch go dependencies :
 ```
-cd $GOPATH/src/github.com/Zenika/pdf-api
+cd $GOPATH/src/github.com/Zenika/goru
 govendor sync
 ```
 
 ## Build
 ```
-cd $GOPATH/src/github.com/Zenika/pdf-api
+cd $GOPATH/src/github.com/Zenika/goru
 go build
 ```
 
 ## Run
 Build then launch server on port 8080 :
 ```
-./pdf-api server 8080
+./goru server 8080
 ```
 
 Upload new files with `PUT` requests on `/document/:file/content` (`file` without `.pdf` suffix) with content type `application/pdf`.
@@ -83,17 +83,17 @@ curl http://www.syntec.fr/fichiers/Annexes/20130719184036_Convention_Syntec_Anne
 ### Examples
 Left rotate a page :
 ```
-./pdf-api left-rotate-page syntec.pdf 1 test.pdf
+./goru left-rotate-page syntec.pdf 1 test.pdf
 ```
 
 Delete a page :
 ```
-./pdf-api delete-page syntec.pdf 2 test.pdf
+./goru delete-page syntec.pdf 2 test.pdf
 ```
 
 Move a page :
 ```
-./pdf-api move-page syntec.pdf 54 1 test.pdf
+./goru move-page syntec.pdf 54 1 test.pdf
 ```
 
 ## TODO
