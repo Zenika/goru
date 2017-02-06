@@ -39,7 +39,7 @@ Upload new files with `PUT` requests on `/document/:file/content` (`file` withou
 
 Download a file with a `GET` request on `/document/:file/content` (`file` without `.pdf` suffix).
 
-Modify a file with a `POST` request on `/document/:file/editeur` (`file` without `.pdf` suffix) with actions to perform.
+Modify a file with a `POST` request on `/document/:file/edit` (`file` without `.pdf` suffix) with actions to perform.
 
 Example :
 ```
