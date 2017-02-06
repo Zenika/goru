@@ -8,5 +8,7 @@ compile:
 
 deployment:
   docker:
-    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-    - docker build -t zenika/goru . && docker push zenika/goru
+    branch: [master]
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker build -t zenika/goru . && docker push zenika/goru
