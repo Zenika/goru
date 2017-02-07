@@ -101,7 +101,3 @@ Move a page :
 ```
 ./goru move-page syntec.pdf 54 1 test.pdf
 ```
-
-## TODO
- - Add logs
- - CircleCI -> WIP
