@@ -3,4 +3,4 @@ FROM scratch
 COPY goru /goru
 
 ENTRYPOINT ["/goru"]
-CMD ["server", "8080"]
+CMD ["server"]

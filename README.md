@@ -8,7 +8,7 @@ This library aims to help people with pdf transformations like rotation, orderin
 
 ## Run in docker
 ```
-docker run -d -p 8080:8080 zenika/goru server 8080
+docker run -d -p 8080:8080 zenika/goru
 ```
 
 ## Installation
@@ -36,9 +36,9 @@ go build
 ```
 
 ## Run
-Build then launch server on port 8080 :
+Build then launch server :
 ```
-./goru server 8080
+./goru server
 ```
 
 Upload new files with `PUT` requests on `/document/:file/content` (`file` without `.pdf` suffix) with content type `application/pdf`.

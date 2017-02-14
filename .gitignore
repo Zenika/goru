@@ -1,3 +1,4 @@
 /vendor/*/
 /goru
 /documents/*.pdf
+/goru.yaml

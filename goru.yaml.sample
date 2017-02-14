@@ -1,0 +1,3 @@
+server:
+  documentsDir: ./documents
+  port: 8080
