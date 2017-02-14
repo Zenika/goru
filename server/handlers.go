@@ -3,12 +3,11 @@ package server // import "github.com/Zenika/goru/server"
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 
-	"github.com/pkg/errors"
-
+	log "github.com/Sirupsen/logrus"
 	"github.com/husobee/vestigo"
+	"github.com/pkg/errors"
 
 	"github.com/Zenika/goru/domain"
 	"github.com/Zenika/goru/pdf"
@@ -16,7 +15,7 @@ import (
 
 func postEditeurHandler(w http.ResponseWriter, r *http.Request) {
 	if err := handlePostEditeurRequest(r); err != nil {
-		log.Println(err)
+		log.Error(err)
 		//FIXME write error to response
 		w.WriteHeader(500)
 		return
@@ -52,7 +51,7 @@ func putDocumentHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := handlePutDocument(r); err != nil {
-		log.Println(err)
+		log.Error(err)
 		//FIXME write error to response
 		w.WriteHeader(500)
 		return
