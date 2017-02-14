@@ -5,9 +5,9 @@ import (
 	"path"
 	"strconv"
 
-	"github.com/pkg/errors"
-
+	log "github.com/Sirupsen/logrus"
 	"github.com/husobee/vestigo"
+	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )
 
@@ -23,7 +23,13 @@ func StartRouter(port int) error {
 	router.Put(path.Join(contextPath, "document/:file/content"), putDocumentHandler)
 	router.Get(path.Join(contextPath, "document/:file/content"), getDocumentHandler)
 
-	println("Starting server on port", port, "and context path", contextPath)
+	vestigo.CustomNotFoundHandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Error("URL not found ", r.URL)
+		w.WriteHeader(404)
+		//FIXME write error to response
+	})
+
+	log.Infof("Starting server on port %d and context path %s", port, contextPath)
 
 	if err := http.ListenAndServe(":"+strconv.Itoa(port), router); err != nil {
 		return errors.Wrap(err, "Could not start HTTP server")

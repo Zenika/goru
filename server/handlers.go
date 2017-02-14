@@ -3,12 +3,11 @@ package server // import "github.com/Zenika/goru/server"
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 
-	"github.com/pkg/errors"
-
+	log "github.com/Sirupsen/logrus"
 	"github.com/husobee/vestigo"
+	"github.com/pkg/errors"
 
 	"github.com/Zenika/goru/domain"
 	"github.com/Zenika/goru/pdf"
@@ -16,7 +15,7 @@ import (
 
 func postEditeurHandler(w http.ResponseWriter, r *http.Request) {
 	if err := handlePostEditeurRequest(r); err != nil {
-		log.Println(err)
+		log.Error(err)
 		//FIXME write error to response
 		w.WriteHeader(500)
 		return
@@ -48,11 +47,12 @@ func putDocumentHandler(w http.ResponseWriter, r *http.Request) {
 
 	if contentType != "application/pdf" {
 		w.WriteHeader(406)
+		//FIXME write error to response
 		return
 	}
 
 	if err := handlePutDocument(r); err != nil {
-		log.Println(err)
+		log.Error(err)
 		//FIXME write error to response
 		w.WriteHeader(500)
 		return
@@ -79,5 +79,6 @@ func handlePutDocument(r *http.Request) error {
 func getDocumentHandler(w http.ResponseWriter, r *http.Request) {
 	file := vestigo.Param(r, "file")
 
+	//TODO standardize error response with other handlers
 	http.ServeFile(w, r, pdf.GetDocumentPath(file))
 }

@@ -5,7 +5,6 @@ import (
 	"path/filepath"
 
 	"github.com/pkg/errors"
-
 	"github.com/spf13/viper"
 	"github.com/unidoc/unidoc/pdf"
 
