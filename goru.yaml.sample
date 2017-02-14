@@ -1,3 +1,4 @@
 server:
-  documentsDir: ./documents
+  contextPath: /goru
+  documentsPath: ./documents
   port: 8080

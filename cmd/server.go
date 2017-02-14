@@ -29,13 +29,15 @@ var serverCmd = &cobra.Command{
 
 func init() {
 	serverCmd.Flags().StringVar(&cfgFile, "config", "", "Config file")
-	serverCmd.Flags().IntP("port", "p", 8080, "Listening port")
+	serverCmd.Flags().String("contextPath", "/goru", "Context path")
 	serverCmd.Flags().String("documentsPath", "documents", "Path of directory containing documents")
+	serverCmd.Flags().IntP("port", "p", 8080, "Listening port")
 
 	RootCmd.AddCommand(serverCmd)
 
-	viper.BindPFlag("server.port", serverCmd.Flags().Lookup("port"))
+	viper.BindPFlag("server.contextPath", serverCmd.Flags().Lookup("contextPath"))
 	viper.BindPFlag("server.documentsPath", serverCmd.Flags().Lookup("documentsPath"))
+	viper.BindPFlag("server.port", serverCmd.Flags().Lookup("port"))
 }
 
 func initConfig() error {
