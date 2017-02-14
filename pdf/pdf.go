@@ -6,21 +6,20 @@ import (
 
 	"github.com/pkg/errors"
 
+	"github.com/spf13/viper"
 	"github.com/unidoc/unidoc/pdf"
 
 	"github.com/Zenika/goru/domain"
-)
-
-const (
-	documentsDir = "documents"
 )
 
 type Document struct {
 	Pages []*pdf.PdfPage
 }
 
+//FIXME split in several files
+
 func EnsureDocumentsDir() error {
-	if err := os.MkdirAll(documentsDir, 0755); err != nil {
+	if err := os.MkdirAll(getDocumentsPath(), 0755); err != nil {
 		return errors.Wrap(err, "Error while creating documents dir")
 	}
 
@@ -44,8 +43,15 @@ func ApplyActionsToFile(inputFile string, actions []domain.Action, outputFile st
 	return nil
 }
 
+func ApplyActionToFile(inputFile string, action domain.Action, outputFile string) error {
+	actions := make([]domain.Action, 1)
+	actions[0] = action
+
+	return ApplyActionsToFile(inputFile, actions, outputFile)
+}
+
 func GetDocumentPath(document string) string {
-	return filepath.Join(documentsDir, document+".pdf")
+	return filepath.Join(getDocumentsPath(), document+".pdf")
 }
 
 func readDocumentFromFile(file string) (*Document, error) {
@@ -91,6 +97,7 @@ func (document *Document) applyActionsToDocument(actions []domain.Action) error 
 	for _, action := range actions {
 		page := action.Page - 1
 
+		//FIXME replace by a map
 		switch action.Action {
 		case "LEFT_ROTATE_PAGE":
 			if err := document.rotatePage(page, -90); err != nil {
@@ -202,4 +209,8 @@ func (document *Document) writeDocumentToFile(file string) error {
 	}
 
 	return nil
+}
+
+func getDocumentsPath() string {
+	return viper.GetString("server.documentsPath")
 }

@@ -16,6 +16,8 @@ func StartRouter(port int) error {
 	router.Put("/api/document/:file/content", putDocumentHandler)
 	router.Get("/api/document/:file/content", getDocumentHandler)
 
+	println("Starting server on port", port)
+
 	if err := http.ListenAndServe(":"+strconv.Itoa(port), router); err != nil {
 		return errors.Wrap(err, "Could not start HTTP server")
 	}
