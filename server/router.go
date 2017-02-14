@@ -23,6 +23,12 @@ func StartRouter(port int) error {
 	router.Put(path.Join(contextPath, "document/:file/content"), putDocumentHandler)
 	router.Get(path.Join(contextPath, "document/:file/content"), getDocumentHandler)
 
+	vestigo.CustomNotFoundHandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Error("URL not found ", r.URL)
+		w.WriteHeader(404)
+		//FIXME write error to response
+	})
+
 	log.Infof("Starting server on port %d and context path %s", port, contextPath)
 
 	if err := http.ListenAndServe(":"+strconv.Itoa(port), router); err != nil {

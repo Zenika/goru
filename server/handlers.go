@@ -47,6 +47,7 @@ func putDocumentHandler(w http.ResponseWriter, r *http.Request) {
 
 	if contentType != "application/pdf" {
 		w.WriteHeader(406)
+		//FIXME write error to response
 		return
 	}
 
@@ -78,5 +79,6 @@ func handlePutDocument(r *http.Request) error {
 func getDocumentHandler(w http.ResponseWriter, r *http.Request) {
 	file := vestigo.Param(r, "file")
 
+	//TODO standardize error response with other handlers
 	http.ServeFile(w, r, pdf.GetDocumentPath(file))
 }
