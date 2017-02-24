@@ -19,6 +19,7 @@ func StartRouter(port int) error {
 		return errors.New("Context path must an absolute path")
 	}
 
+	router.Get(contextPath, goruRootHandler)
 	router.Post(path.Join(contextPath, "document/:file/edit"), postEditeurHandler)
 	router.Put(path.Join(contextPath, "document/:file/content"), putDocumentHandler)
 	router.Get(path.Join(contextPath, "document/:file/content"), getDocumentHandler)

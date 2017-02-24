@@ -4,14 +4,21 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-
 	log "github.com/Sirupsen/logrus"
 	"github.com/husobee/vestigo"
 	"github.com/pkg/errors"
-
 	"github.com/Zenika/goru/domain"
 	"github.com/Zenika/goru/pdf"
+	"github.com/Zenika/goru/version"
+	"github.com/spf13/viper"
 )
+
+func goruRootHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	settings := viper.AllSettings()
+	settings["version"] = version.Version
+	json.NewEncoder(w).Encode(settings)
+}
 
 func postEditeurHandler(w http.ResponseWriter, r *http.Request) {
 	if err := handlePostEditeurRequest(r); err != nil {
