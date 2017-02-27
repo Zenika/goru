@@ -15,7 +15,8 @@ import (
 
 func goruRootHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	settings := viper.AllSettings()
+	settings := make(map[string]interface{})
+	settings["config"] = viper.AllSettings()
 	settings["version"] = version.Version
 	json.NewEncoder(w).Encode(settings)
 }
