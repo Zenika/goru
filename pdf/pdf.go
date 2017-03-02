@@ -165,10 +165,6 @@ func (document *Document) movePage(page int, pTarget *int) error {
 		return errors.Errorf("Invalid target %d, should be between 1 and %d", target+1, len(document.Pages)+1)
 	}
 
-	if page < target {
-		target -= 1
-	}
-
 	pageToMove := document.Pages[page]
 	document.Pages = append(document.Pages[:page], document.Pages[page+1:]...)
 	document.Pages = append(document.Pages[:target], append([]*pdf.PdfPage{pageToMove}, document.Pages[target:]...)...)
