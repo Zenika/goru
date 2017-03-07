@@ -12,4 +12,6 @@ deployment:
     owner: Zenika
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker build -t zenika/goru:${CIRCLE_TAG} -t zenika/goru:latest . && docker push zenika/goru
+      - docker build -t zenika/goru:${CIRCLE_TAG} -t zenika/goru:latest .
+      - docker push zenika/goru:${CIRCLE_TAG}
+      - docker push zenika/goru:latest
