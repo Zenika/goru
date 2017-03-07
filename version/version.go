@@ -1,3 +1,6 @@
-package version
+package version // import "github.com/Zenika/goru/version"
 
-const Version = "0.0.1"
+var (
+	Version string
+	Hash    string
+)

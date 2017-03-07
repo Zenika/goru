@@ -10,7 +10,7 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Show version",
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Infof("Version: %s", version.Version)
+		log.Infof("Version: %s, Hash: %s", version.Version, version.Hash)
 	},
 }
 
