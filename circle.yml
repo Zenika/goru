@@ -2,6 +2,10 @@ machine:
   services:
     - docker
 
+dependencies:
+  override:
+    - echo Ignore defaults
+
 compile:
   override:
     - docker run -v $(pwd):/go/src/github.com/Zenika/goru zenika/alpine-golang:1.7 /bin/ash -c "cd /go/src/github.com/Zenika/goru && govendor sync && GOOS=linux go build -a --ldflags '-extldflags \"-static\"' -tags netgo -installsuffix netgo"
