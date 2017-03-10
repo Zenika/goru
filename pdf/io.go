@@ -9,6 +9,10 @@ import (
 	"github.com/unidoc/unidoc/pdf"
 )
 
+var (
+	documentsPath *string
+)
+
 func EnsureDocumentsDir() error {
 	if err := os.MkdirAll(getDocumentsPath(), 0755); err != nil {
 		return errors.Wrap(err, "Error while creating documents dir")
@@ -22,7 +26,11 @@ func GetDocumentPath(document string) string {
 }
 
 func getDocumentsPath() string {
-	return viper.GetString("server.documentsPath")
+	if documentsPath == nil {
+		documentsPathValue := viper.GetString("server.documentsPath")
+		documentsPath = &documentsPathValue
+	}
+	return *documentsPath
 }
 
 func readDocumentFromFile(file string) (*Document, error) {
