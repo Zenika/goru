@@ -23,10 +23,7 @@ var rightRotatePageCmd = &cobra.Command{
 			return errors.Wrap(err, "Page number must be a valid integer")
 		}
 		outputFile := args[2]
-		action := domain.Action{
-			Action: "RIGHT_ROTATE_PAGE",
-			Page:   pageNumber,
-		}
+		action := domain.NewAction(pdf.RIGHT_ROTATE_PAGE, pageNumber, nil)
 		return pdf.ApplyActionToFile(inputFile, action, outputFile)
 	},
 }

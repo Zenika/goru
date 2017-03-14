@@ -27,11 +27,7 @@ var movePageCmd = &cobra.Command{
 			return errors.Wrap(err, "Target must be a valid integer")
 		}
 		outputFile := args[3]
-		action := domain.Action{
-			Action: "MOVE_PAGE",
-			Page:   pageNumber,
-			Target: &target,
-		}
+		action := domain.NewAction(pdf.MOVE_PAGE, pageNumber, &target)
 		return pdf.ApplyActionToFile(inputFile, action, outputFile)
 	},
 }
