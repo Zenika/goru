@@ -8,15 +8,18 @@ dependencies:
 
 compile:
   override:
-    - docker run -v $(pwd):/go/src/github.com/Zenika/goru zenika/alpine-golang:1.7 /bin/ash -c "cd /go/src/github.com/Zenika/goru && govendor sync && GOOS=linux go build -a --ldflags '-extldflags \"-static\"' -tags netgo -installsuffix netgo"
+    - docker run -v $(pwd):/go/src/github.com/Zenika/goru zenika/alpine-golang:1.7 /bin/ash -c "cd /go/src/github.com/Zenika/goru && govendor sync && GOOS=linux go build -a -ldflags \"-extldflags \\"-static\\" -X github.com/Zenika/goru/version.Version=${CIRCLE_TAG:-$CIRCLE_BRANCH} -X github.com/Zenika/goru/version.Hash=${CIRCLE_SHA1}\" -tags netgo -installsuffix netgo"
 
 test:
   override:
     - echo Ignore defaults
 
 deployment:
-  docker:
-    branch: [master]
+  release:
+    tag: /\d+(\.\d+)*/
+    owner: Zenika
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker build -t zenika/goru . && docker push zenika/goru
+      - docker build -t zenika/goru:${CIRCLE_TAG} -t zenika/goru:latest .
+      - docker push zenika/goru:${CIRCLE_TAG}
+      - docker push zenika/goru:latest
